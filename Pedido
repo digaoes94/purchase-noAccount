@@ -1,0 +1,117 @@
+package general;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Pedido {
+	Scanner scan = new Scanner(System.in);
+	
+	private LocalDateTime momentoPedido;
+
+	String momentoFormatado;
+	private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+	private PedidoStatus situacao;
+	private Cliente cliente;
+	private List<PedidoItem> listaItens = new ArrayList<PedidoItem>();
+	
+	//  construtor
+	public Pedido(PedidoStatus situacao, Cliente cliente) {
+		this.situacao = situacao;
+		this.cliente = cliente;
+	}
+
+	//  get set momentoPedido
+	public LocalDateTime getMomentoPedido() {
+		return momentoPedido;
+	}
+	public void setMomentoPedido() {
+		this.momentoPedido = LocalDateTime.now();
+	}
+	
+	//  get set momentoFormatado
+	public String getMomentoFormatado() {
+		setMomentoFormatado();
+		return momentoFormatado;
+	}
+	public void setMomentoFormatado() {
+		setMomentoPedido();
+		this.momentoFormatado = momentoPedido.format(dateFormat);
+	}
+
+	//  get set situacao
+	public PedidoStatus getSituacao() {
+		return situacao;
+	}
+	public void setSituacao(PedidoStatus situacao) {
+		this.situacao = situacao;
+	}
+
+	//  get set cliente
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
+	public void AdicionarItem(PedidoItem item) {
+		listaItens.add(item);
+	}
+	
+	public void RemoverItem() {
+		System.out.println("Favor digitar nome do produto a ser excluído:");
+		String excluir = scan.next();
+		
+		for (PedidoItem i : listaItens) {
+			if (i.getP().getName() == excluir) {listaItens.remove(i);}
+		}
+	}
+	
+	public double TotalAtual() {
+		double totalAtual = 0;
+		
+		for (PedidoItem i : listaItens) {totalAtual += i.Subtotal();}
+		
+		return totalAtual;
+	}
+	
+	public double TotalFinal() {
+		
+		double totalFinal = 0;
+		
+		for (PedidoItem i : listaItens) {totalFinal += i.Subtotal();}
+		
+		return totalFinal;
+	}
+	
+	public String toString() {
+		String resumo = "Resumo do pedido --- " + getMomentoFormatado() + "\n";
+		resumo += cliente.toString() + "\n";
+		resumo += "Situação do pedido: " + getSituacao() + "\n";
+		
+		for (PedidoItem i : listaItens) {
+			resumo += i.toString() + "\n";
+		}
+		
+		resumo += "Total do Pedido: R$ " + String.format("%.2f", TotalAtual());
+		
+		return resumo;
+	}
+	
+	public String PedidoFinalizado() {
+		String resumo = "Resumo do pedido --- " + getMomentoFormatado() + "\n";
+		resumo += cliente.toString() + "\n";
+		resumo += "Situação do pedido: " + getSituacao() + "\n";
+		
+		for (PedidoItem i : listaItens) {
+			resumo += i.toString() + "\n";
+		}
+		
+		resumo += "Total do Pedido: R$ " + String.format("%.2f", TotalFinal());
+		
+		return resumo;
+	}
+}
