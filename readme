@@ -1,0 +1,1 @@
+Code created from a exercise proposed by Nelio Alves. Updated: Date to LocalDateTime and SimpleDateFormatter to DateTimeFormatter; added switch; created menu(); treated the several toString() a different way
