@@ -1,0 +1,32 @@
+package general;
+
+public class Produto {
+	private String name;
+	private double price;
+	
+	public Produto(String name, double price) {
+		this.name = name;
+		this.price = price;
+	}
+
+	//  get set name
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	//  get set price
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	public String toString() {
+		String resumo = "Produto: " + getName() + ". Preço por unidade: R$ " + String.format("%.2f", getPrice())  + ".";
+		return resumo;
+	}
+}
