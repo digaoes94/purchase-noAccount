@@ -1,0 +1,58 @@
+package general;
+
+import java.util.Scanner;
+
+public class PedidoItem {
+	Scanner scan = new Scanner(System.in);
+	private Produto p;
+	private double price;
+	private int quant;
+	
+	public PedidoItem() {
+		System.out.println("Digite o nome do produto: ");
+		String name = scan.nextLine();
+		
+		System.out.println("Digite o preço do produto: ");
+		double price = scan.nextDouble();
+		
+		System.out.println("Digite a quantidade do produto: ");
+		int quant = scan.nextInt();
+		
+		this.p = new Produto(name, price);
+		this.price = price;
+		this.quant = quant;
+	}
+	
+	//  get set Produto
+	public Produto getP() {
+		return p;
+	}
+	public void setP(Produto p) {
+		this.p = p;
+	}
+
+	//  get set price
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	// get set quant
+	public int getQuant() {
+		return quant;
+	}
+	public void setQuant(int quant) {
+		this.quant = quant;
+	}
+	
+	public double Subtotal() {
+		return this.price * this.quant;
+	}
+	
+	public String toString() {
+		String resumo = p.toString() + " Unidades compradas: " + getQuant() + ". Subtotal: R$ " + String.format("%.2f", Subtotal()) + ".";
+		return resumo;
+	}
+}
