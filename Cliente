@@ -1,0 +1,35 @@
+package general;
+
+import java.util.Scanner;
+
+public class Cliente {
+	Scanner scan = new Scanner(System.in);
+	
+	private String clienteNome;
+	private String clienteEmail;
+	
+	public Cliente(String clienteNome, String clienteEmail) {
+		this.clienteNome = clienteNome;
+		this.clienteEmail = clienteEmail;
+	}
+
+	//  get set name
+	public String getClienteNome() {
+		return clienteNome;
+	}
+	public void setClienteNome(String clienteNome) {
+		this.clienteNome = clienteNome;
+	}
+
+	//  get set email
+	public String getClienteEmail() {
+		return clienteEmail;
+	}
+	public void setClienteEmail(String clienteEmail) {
+		this.clienteEmail = clienteEmail;
+	}
+	
+	public String toString() {
+		return "Cliente: " + clienteNome + ". Email: " + clienteEmail + ".";
+	}
+}
